@@ -1,0 +1,35 @@
+version: '3.7'
+
+networks:
+    demo-net:
+        name: demo-net
+        driver: bridge
+
+volumes:
+    streaming-api-db-data:
+
+services:
+    streaming-api:
+        container_name: streaming-api
+        image: streaming-api
+        build:
+            context: .
+            dockerfile: Dockerfile
+        restart: always
+        networks:
+            - demo-net
+        ports:
+            - 3101:3101
+        depends_on:
+            - streaming-api-db
+
+    streaming-api-db:
+        container_name: streaming-api-db
+        image: mongo:4.2.2
+        restart: always
+        volumes:
+            - streaming-api-db-data:/data/db
+        networks:
+            - demo-net
+
+    
