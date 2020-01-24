@@ -14,6 +14,8 @@ async function bootstrap() {
     new FastifyAdapter(),
   )
 
+  app.enableShutdownHooks()
+
   app.register(fastifyMulipart)
 
   const options = new DocumentBuilder()
