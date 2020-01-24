@@ -8,7 +8,7 @@ import { FileModel } from './models/file.entity'
   imports: [
     MongooseModule.forRoot(
       `mongodb://${
-        process.env.NODE_ENV === 'development' ? 'localhost' : 'localhost'
+        process.env.NODE_ENV === 'docker' ? 'streaming-api-db' : 'localhost'
       }:27017/streaming`,
       {
         useUnifiedTopology: true,
