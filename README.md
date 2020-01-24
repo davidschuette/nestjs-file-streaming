@@ -14,17 +14,25 @@
 - [`MongoDB GridFS`](https://www.npmjs.com/package/mongoose) for streaming chunked files to and from Mongo DB
 - [`fastify-multipart`](https://www.npmjs.com/package/fastify-multipart) to parse Multipart forms
 
-## _Caution! This is not a production grade server_
-
 ## Setup
 
 ### Docker
 
 - `docker-compose up -d`
-- Swagger documentation can be found at `/api/`
+- Swagger documentation can be found at `http://localhost:3101/api/`
 
-### local
+### Local
 
 - Start a MongoDB instance with default configuration
-- Use `nest start` or `npm build` and `npm run start:prod` to start the server
-- Swagger documentation can be found at `/api/`
+- Use `npm start` to compile and start the server
+- Swagger documentation can be found at `http://localhost:3101/api/`
+
+## Usage
+
+- Upload a file: `POST` to `http://localhost:3101/` as multipart/form-data with `file` field
+- Download an uploaded file: `GET` to `http://localhost:3101/<id>`
+- `GET` to `http://localhost:3101` for list of uploaded videos
+- More information can be found in the Swagger Documentation
+
+
+## _Caution! This is not a production grade server_
