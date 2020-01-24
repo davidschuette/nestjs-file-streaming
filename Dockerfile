@@ -38,7 +38,7 @@ COPY --from=0 /usr/src/api/package*.json ./
 # Install packages needed for production
 RUN npm ci --only-production
 
-EXPOSE 3101
+ENV NODE_ENV=docker
 
 # Start process
-CMD node main.js
+CMD node src/main.js
