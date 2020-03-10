@@ -31,5 +31,7 @@ services:
             - streaming-api-db-data:/data/db
         networks:
             - demo-net
+        ports:
+            - 27017:27017
 
     

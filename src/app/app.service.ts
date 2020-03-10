@@ -62,6 +62,8 @@ export class AppService {
       if (!fileInfo) {
         throw new NotFoundException(null, 'VideoNotFound')
       }
+      
+      console.log('Responing with type', fileInfo.contentType)
 
       if (request.headers.range) {
         const range = request.headers.range.substr(6).split('-')
@@ -82,9 +84,17 @@ export class AppService {
           'Content-Length': (end ? end : fileInfo.length) - start,
         })
 
+        response.res.on('close', () => {
+          readstream.destroy()
+        })
+
         response.send(readstream)
       } else {
         const readstream = this.bucket.openDownloadStream(oId)
+
+        response.res.on('close', () => {
+          readstream.destroy()
+        })
 
         response.status(200)
         response.headers({

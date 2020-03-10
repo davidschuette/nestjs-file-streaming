@@ -14,7 +14,7 @@ COPY ./package*.json ./
 COPY ./tsconfig*.json ./
 COPY ./tslint*.json ./
 
-RUN npm ci
+RUN npm ci --no-progress --no-audit --prefer-offline
 
 # Bundle app source
 COPY ./src/. ./src
@@ -36,7 +36,7 @@ COPY --from=0 /usr/src/api/dist .
 COPY --from=0 /usr/src/api/package*.json ./
 
 # Install packages needed for production
-RUN npm ci --only-production
+RUN npm ci --only-production --no-progress --no-audit --prefer-offline
 
 ENV NODE_ENV=docker
 
