@@ -11,10 +11,10 @@ WORKDIR /usr/src/api
 # Install app dependencies
 
 COPY ./package*.json ./
+RUN npm ci --no-progress --no-audit --prefer-offline
+
 COPY ./tsconfig*.json ./
 COPY ./tslint*.json ./
-
-RUN npm ci --no-progress --no-audit --prefer-offline
 
 # Bundle app source
 COPY ./src/. ./src
@@ -31,12 +31,12 @@ RUN apk --no-cache add --virtual builds-deps build-base python
 
 WORKDIR /usr/src/api
 
+# Install packages needed for production
+COPY --from=0 /usr/src/api/package*.json ./
+RUN npm ci --only-production --no-progress --no-audit --prefer-offline
+
 # Copy compiled files
 COPY --from=0 /usr/src/api/dist .
-COPY --from=0 /usr/src/api/package*.json ./
-
-# Install packages needed for production
-RUN npm ci --only-production --no-progress --no-audit --prefer-offline
 
 ENV NODE_ENV=docker
 
