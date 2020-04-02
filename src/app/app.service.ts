@@ -2,6 +2,7 @@ import {
   Injectable,
   NotFoundException,
   ServiceUnavailableException,
+  BadRequestException,
 } from '@nestjs/common'
 import { InjectConnection, InjectModel } from '@nestjs/mongoose'
 import { FastifyReply, FastifyRequest } from 'fastify'
@@ -56,14 +57,16 @@ export class AppService {
 
   async download(id: string, request: Request, response: Response) {
     try {
+      if (!ObjectId.isValid(id)) {
+        throw new BadRequestException(null, 'InvalidVideoId')
+      }
+
       const oId = new ObjectId(id)
-      const fileInfo = await this.fileModel.findOne({ _id: oId })
+      const fileInfo = await this.fileModel.findOne({ _id: oId }).exec()
 
       if (!fileInfo) {
         throw new NotFoundException(null, 'VideoNotFound')
       }
-      
-      console.log('Responing with type', fileInfo.contentType)
 
       if (request.headers.range) {
         const range = request.headers.range.substr(6).split('-')
@@ -82,6 +85,7 @@ export class AppService {
             fileInfo.length
           }`,
           'Content-Length': (end ? end : fileInfo.length) - start,
+          'Content-Disposition': `attachment; filename="${fileInfo.filename}"`,
         })
 
         response.res.on('close', () => {
@@ -101,6 +105,7 @@ export class AppService {
           'Accept-Range': 'bytes',
           'Content-Type': fileInfo.contentType,
           'Content-Length': fileInfo.length,
+          'Content-Disposition': `attachment; filename="${fileInfo.filename}"`,
         })
 
         response.send(readstream)

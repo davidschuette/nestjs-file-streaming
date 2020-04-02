@@ -27,6 +27,8 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options)
   SwaggerModule.setup('api', app, document)
 
-  await app.listen(3101)
+  await app.listen(3101, '0.0.0.0', () => {
+    console.log('Server listening at http://0.0.0.0:' + 3101 + '/api/')
+  })
 }
 bootstrap()
