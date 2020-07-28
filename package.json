@@ -15,29 +15,29 @@
     "lint": "tslint -p tsconfig.json -c tslint.json"
   },
   "dependencies": {
-    "@nestjs/common": "^7.0.7",
-    "@nestjs/core": "^7.0.7",
-    "@nestjs/mongoose": "^6.4.0",
-    "@nestjs/platform-fastify": "^7.0.7",
-    "@nestjs/swagger": "^4.5.1",
-    "fastify-multipart": "^1.0.5",
-    "fastify-swagger": "^2.5.0",
-    "mongoose": "^5.9.7",
+    "@nestjs/common": "^7.3.2",
+    "@nestjs/core": "^7.3.2",
+    "@nestjs/mongoose": "^7.0.2",
+    "@nestjs/platform-fastify": "^7.3.2",
+    "@nestjs/swagger": "^4.5.12",
+    "fastify-multipart": "^1.0.6",
+    "fastify-swagger": "^2.6.0",
+    "mongoose": "^5.9.26",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.5.3"
+    "rxjs": "^6.6.0"
   },
   "devDependencies": {
-    "@nestjs/cli": "^7.1.2",
-    "@nestjs/schematics": "^7.0.0",
+    "@nestjs/cli": "^7.4.1",
+    "@nestjs/schematics": "^7.0.1",
     "@types/fastify-multipart": "^0.7.0",
-    "@types/mongoose": "^5.7.8",
-    "@types/node": "^12.12.34",
-    "prettier": "^2.0.2",
-    "ts-loader": "^6.2.2",
-    "ts-node": "^8.8.1",
+    "@types/mongoose": "^5.7.32",
+    "@types/node": "^12.12.53",
+    "prettier": "^2.0.5",
+    "ts-loader": "^8.0.1",
+    "ts-node": "^8.10.2",
     "tsconfig-paths": "^3.9.0",
-    "tslint": "^6.1.1",
-    "typescript": "^3.8.3"
+    "tslint": "^6.1.2",
+    "typescript": "^3.9.7"
   }
 }

@@ -62,7 +62,7 @@ export class AppService {
       }
 
       const oId = new ObjectId(id)
-      const fileInfo = await this.fileModel.findOne({ _id: oId }).exec()
+      const fileInfo = await this.fileModel.findOne({ _id: id }).exec()
 
       if (!fileInfo) {
         throw new NotFoundException(null, 'VideoNotFound')
