@@ -13,7 +13,7 @@ import {
 import { File } from './models/file.entity'
 
 type Request = FastifyRequest
-type Response = FastifyReply<Http2ServerResponse>
+type Response = FastifyReply
 
 @ApiTags('File')
 @Controller()

@@ -20,8 +20,8 @@
     "@nestjs/mongoose": "^7.0.2",
     "@nestjs/platform-fastify": "^7.3.2",
     "@nestjs/swagger": "^4.5.12",
-    "fastify-multipart": "^1.0.6",
-    "fastify-swagger": "^2.6.0",
+    "fastify-multipart": "~3.3.1",
+    "fastify-swagger": "~3.5.0",
     "mongoose": "^5.9.26",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
@@ -31,13 +31,12 @@
     "@nestjs/cli": "^7.4.1",
     "@nestjs/schematics": "^7.0.1",
     "@types/fastify-multipart": "^0.7.0",
-    "@types/mongoose": "^5.7.32",
-    "@types/node": "^12.12.53",
+    "@types/node": "~14.14.22",
     "prettier": "^2.0.5",
     "ts-loader": "^8.0.1",
-    "ts-node": "^8.10.2",
+    "ts-node": "~9.1.1",
     "tsconfig-paths": "^3.9.0",
     "tslint": "^6.1.2",
-    "typescript": "^3.9.7"
+    "typescript": "~4.1.3"
   }
 }

@@ -13,7 +13,7 @@ import { File } from './models/file.entity'
 import { Stream } from 'stream'
 
 type Request = FastifyRequest
-type Response = FastifyReply<Http2ServerResponse>
+type Response = FastifyReply
 
 @Injectable()
 export class AppService {
@@ -31,9 +31,15 @@ export class AppService {
       try {
         request.multipart(
           (field, file: Stream, filename, encoding, mimetype) => {
-            const uploadStream = this.bucket.openUploadStream(filename, {
-              contentType: mimetype,
-            })
+            const id = new ObjectId()
+            console.log(id)
+            const uploadStream = this.bucket.openUploadStreamWithId(
+              id,
+              filename,
+              {
+                contentType: mimetype,
+              },
+            )
 
             file.on('end', () => {
               resolve({
@@ -43,7 +49,7 @@ export class AppService {
 
             file.pipe(uploadStream)
           },
-          err => {
+          (err) => {
             console.error(err)
             reject(new ServiceUnavailableException())
           },
@@ -88,7 +94,7 @@ export class AppService {
           'Content-Disposition': `attachment; filename="${fileInfo.filename}"`,
         })
 
-        response.res.on('close', () => {
+        response.raw.on('close', () => {
           readstream.destroy()
         })
 
@@ -96,7 +102,7 @@ export class AppService {
       } else {
         const readstream = this.bucket.openDownloadStream(oId)
 
-        response.res.on('close', () => {
+        response.raw.on('close', () => {
           readstream.destroy()
         })
 

@@ -5,7 +5,7 @@ import {
 } from '@nestjs/platform-fastify'
 import { AppModule } from './app/app.module'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
-import * as fastifyMulipart from 'fastify-multipart'
+import fastifyMulipart from 'fastify-multipart'
 import { version } from '../package.json'
 
 async function bootstrap() {
