@@ -1,9 +1,7 @@
 ##########################
 # Build Stage
 
-FROM node:14-alpine
-
-RUN apk --no-cache add --virtual builds-deps build-base python
+FROM node:16-alpine
 
 # Create app directory
 WORKDIR /usr/src/api
@@ -25,9 +23,7 @@ RUN npm run build
 ##########################
 # Run Stage
 
-FROM node:14-alpine
-
-RUN apk --no-cache add --virtual builds-deps build-base python
+FROM node:16-alpine
 
 WORKDIR /usr/src/api
 

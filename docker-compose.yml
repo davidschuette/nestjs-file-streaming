@@ -25,13 +25,11 @@ services:
 
     streaming-api-db:
         container_name: streaming-api-db
-        image: mongo:4.2.2
+        image: mongo:5.0.1
         restart: always
         volumes:
             - streaming-api-db-data:/data/db
         networks:
             - demo-net
-        ports:
-            - 27017:27017
 
     

@@ -32,7 +32,6 @@ export class AppService {
         request.multipart(
           (field, file: Stream, filename, encoding, mimetype) => {
             const id = new ObjectId()
-            console.log(id)
             const uploadStream = this.bucket.openUploadStreamWithId(
               id,
               filename,
