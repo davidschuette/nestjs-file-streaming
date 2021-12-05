@@ -1,4 +1,5 @@
 # NestJS File Streaming
+[![CodeQL](https://github.com/davidschuette/nestjs-file-streaming/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/davidschuette/nestjs-file-streaming/actions/workflows/codeql-analysis.yml)
 
 ## Features
 
