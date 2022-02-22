@@ -1,4 +1,5 @@
 # NestJS File Streaming
+
 [![CodeQL](https://github.com/davidschuette/nestjs-file-streaming/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/davidschuette/nestjs-file-streaming/actions/workflows/codeql-analysis.yml)
 
 ## Features
@@ -6,6 +7,7 @@
 - Efficient upload / download
 - Very low RAM usage
 - Great for providing large files without storing them in the filesystem
+- Can be used to efficiently stream video files (skipping in the timeline will result in a partial download)
 - Accepts `range` header to support partial downloads
 
 ## Used packages
@@ -34,6 +36,5 @@
 - Download an uploaded file: `GET` to `http://localhost:3101/<id>`
 - `GET` to `http://localhost:3101` for list of uploaded videos
 - More information can be found in the Swagger Documentation
-
 
 ## _Caution! This is not a production grade server_
