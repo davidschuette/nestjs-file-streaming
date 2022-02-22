@@ -1,16 +1,16 @@
 import {
+  BadRequestException,
   Injectable,
   NotFoundException,
   ServiceUnavailableException,
-  BadRequestException,
+  StreamableFile,
 } from '@nestjs/common'
 import { InjectConnection, InjectModel } from '@nestjs/mongoose'
 import { FastifyReply, FastifyRequest } from 'fastify'
-import { Http2ServerResponse } from 'http2'
 import { GridFSBucket, ObjectId } from 'mongodb'
 import { Connection, Model, mongo } from 'mongoose'
-import { File } from './models/file.entity'
 import { Stream } from 'stream'
+import { File } from './models/file.entity'
 
 type Request = FastifyRequest
 type Response = FastifyReply
@@ -60,7 +60,11 @@ export class AppService {
     })
   }
 
-  async download(id: string, request: Request, response: Response) {
+  async download(
+    id: string,
+    request: Request,
+    response: Response,
+  ): Promise<StreamableFile> {
     try {
       if (!ObjectId.isValid(id)) {
         throw new BadRequestException(null, 'InvalidVideoId')
@@ -93,17 +97,9 @@ export class AppService {
           'Content-Disposition': `attachment; filename="${fileInfo.filename}"`,
         })
 
-        response.raw.on('close', () => {
-          readstream.destroy()
-        })
-
-        response.send(readstream)
+        return new StreamableFile(readstream)
       } else {
         const readstream = this.bucket.openDownloadStream(oId)
-
-        response.raw.on('close', () => {
-          readstream.destroy()
-        })
 
         response.status(200)
         response.headers({

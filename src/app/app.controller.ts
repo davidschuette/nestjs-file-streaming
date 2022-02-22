@@ -1,15 +1,21 @@
-import { Controller, Get, Param, Post, Req, Res } from '@nestjs/common'
-import { AppService } from './app.service'
-
-import { FastifyRequest, FastifyReply } from 'fastify'
-import { Http2ServerResponse } from 'http2'
 import {
-  ApiTags,
-  ApiOperation,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Req,
+  Res,
+  StreamableFile,
+} from '@nestjs/common'
+import {
   ApiConsumes,
-  ApiOkResponse,
   ApiCreatedResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
 } from '@nestjs/swagger'
+import { FastifyReply, FastifyRequest } from 'fastify'
+import { AppService } from './app.service'
 import { File } from './models/file.entity'
 
 type Request = FastifyRequest
@@ -79,8 +85,8 @@ export class AppController {
   downloadFile(
     @Param('id') id: string,
     @Req() request: Request,
-    @Res() response: Response,
-  ) {
-    this.appService.download(id, request, response)
+    @Res({ passthrough: true }) response: Response,
+  ): Promise<StreamableFile> {
+    return this.appService.download(id, request, response)
   }
 }
